@@ -10,4 +10,3 @@ Skills:
 Consume Alcohol 5, Cool 5, Endurance 5, Language (Classical) 5, Lore (Engineer) 5, Perception 5, Ranged (Blackpowder) 5, Trade (Engineer) 5
 
 Talents:
-
