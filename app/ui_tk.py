@@ -19,7 +19,7 @@ def run_app():
     root.title("WFRP NPC Gen (minimal)")
 
     frm = ttk.Frame(root, padding=10)
-    frm.grid()
+    frm.grid(padx=8, pady=8)
 
     ttk.Label(frm, text="Name").grid(column=0, row=0)
     name = tk.StringVar()
@@ -60,8 +60,8 @@ def run_app():
         except Exception as e:
             lbl_status.config(text=f"Error: {e}")
 
-    ttk.Button(frm, text="Start NPC", command=on_start).grid(column=0, row=3)
-    ttk.Button(frm, text="Add Career", command=on_add_career).grid(column=1, row=3, sticky=tk.W)
+    ttk.Button(frm, text="Start NPC", command=on_start).grid(column=0, row=3, pady=4)
+    ttk.Button(frm, text="Add Career", command=on_add_career).grid(column=1, row=3, sticky=tk.W, pady=4)
 
     # Listbox to show added careers
     lb_careers = tk.Listbox(frm, height=6, width=40)
@@ -128,7 +128,7 @@ def run_app():
         except Exception as e:
             lbl_status.config(text=f"Export error: {e}")
 
-    ttk.Button(frm, text="Export NPC", command=on_export).grid(column=0, row=10)
+    ttk.Button(frm, text="Export NPC", command=on_export).grid(column=0, row=10, pady=6)
     def on_open_output():
         out = Path(OUTPUT_DIR)
         out.mkdir(parents=True, exist_ok=True)
@@ -138,7 +138,50 @@ def run_app():
         except Exception:
             messagebox.showinfo("Open Folder", f"Output folder: {out}")
 
-    ttk.Button(frm, text="Open Output Folder", command=on_open_output).grid(column=1, row=10)
+    ttk.Button(frm, text="Open Output Folder", command=on_open_output).grid(column=1, row=10, pady=6)
+
+    def on_undo():
+        removed = vm.undo_last_career()
+        if not removed:
+            lbl_status.config(text="Nothing to undo")
+            return
+        # remove items from listbox equal to number removed
+        for _ in range(len(removed)):
+            if lb_careers.size() > 0:
+                lb_careers.delete(tk.END)
+        refresh_summary()
+        lbl_status.config(text=f"Undid: {', '.join(f'{c.career} {c.level}' for c in removed)}")
+
+    def on_history():
+        # show history groups with Undo buttons
+        dlg = tk.Toplevel(root)
+        dlg.title("History")
+        frame = ttk.Frame(dlg, padding=8)
+        frame.pack(fill='both', expand=True)
+        for i, group in enumerate(list(vm._history)):
+            row = i
+            lbl = ttk.Label(frame, text=f"Group {i+1}: " + ", ".join(f"{c.career} {c.level}" for c in group))
+            lbl.grid(column=0, row=row, sticky='w', pady=2)
+            def make_undo(idx):
+                def _undo():
+                    removed = vm.undo_history_index(idx)
+                    # refresh careers listbox to reflect current career_levels
+                    lb_careers.delete(0, tk.END)
+                    for c in vm.career_levels:
+                        display = f"{c.career} {c.level}"
+                        if c.talents:
+                            display += f" - Talents: {', '.join(c.talents)}"
+                        else:
+                            display += " - Talents: (none)"
+                        lb_careers.insert(tk.END, display)
+                    refresh_summary()
+                    messagebox.showinfo("Undo", f"Undid: {', '.join(f'{c.career} {c.level}' for c in removed)}")
+                return _undo
+            btn = ttk.Button(frame, text="Undo Group", command=make_undo(i))
+            btn.grid(column=1, row=row, padx=6)
+
+    ttk.Button(frm, text="Undo Last", command=on_undo).grid(column=0, row=11, pady=4)
+    ttk.Button(frm, text="History", command=on_history).grid(column=1, row=11, pady=4)
 
     def on_details():
         s = vm.get_summary()
@@ -193,10 +236,11 @@ def ask_talents_dialog(parent, career: str, level: int, options: list):
 
     def on_ok():
         selections = [lb.get(i) for i in lb.curselection()]
-        # if nothing selected, try to take the first item if exists
         if not selections:
-            messagebox.showerror("Selection required", "Please select or add at least one talent.")
-            return
+            proceed = messagebox.askyesno("No talents selected",
+                                          "You have not selected any talents for this career level. Proceed without talents?")
+            if not proceed:
+                return
         nonlocal sel
         sel = selections
         dlg.destroy()

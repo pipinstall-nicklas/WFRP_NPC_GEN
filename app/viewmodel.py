@@ -1,7 +1,8 @@
 """Glue layer between UI and generator.
 
 Provides an incremental API used by the Tk UI: start a new NPC, add careers one
-by one (expands from CSV), and obtain live formatted summary.
+by one (expands from CSV), and obtain live formatted summary. Supports undoing
+last group of career additions.
 """
 from typing import List
 
@@ -19,6 +20,8 @@ class ViewModel:
         self.name = ""
         self.race = ""
         self.career_levels: List[CareerLevel] = []
+        # history stores groups of CareerLevel objects added together
+        self._history: List[List[CareerLevel]] = []
 
     def start_new_npc(self, name: str, race: str):
         if not name:
@@ -26,10 +29,13 @@ class ViewModel:
         self.name = name
         self.race = race
         self.career_levels = []
+        self._history = []
 
     def add_career_str(self, career_input: str) -> List[CareerLevel]:
-        """Add a single career string like 'Engineer:2' or 'Smith' and return
-        the CareerLevel rows that were added (expanded from CSV when possible).
+        """Add a career string like 'Engineer:2' or 'Smith' and return the added rows.
+
+        Multiple comma-separated entries are allowed and all of them are recorded
+        as a single history group for undo.
         """
         parts = [p.strip() for p in career_input.split(",") if p.strip()]
         added: List[CareerLevel] = []
@@ -53,7 +59,38 @@ class ViewModel:
                 self.career_levels.extend(expanded)
                 added.extend(expanded)
 
+        if added:
+            self._history.append(added.copy())
         return added
+
+    def undo_last_career(self) -> List[CareerLevel]:
+        """Undo the last group of career-level additions and return the removed list."""
+        if not self._history:
+            return []
+        last_group = self._history.pop()
+        # remove the same number of items from the end
+        for _ in range(len(last_group)):
+            if self.career_levels:
+                self.career_levels.pop()
+        return last_group
+
+    def undo_history_index(self, index: int) -> List[CareerLevel]:
+        """Undo a history group at a specific index (0-based).
+
+        Removes those exact CareerLevel objects from the current career_levels
+        list and deletes the history entry. Returns the removed group.
+        """
+        if index < 0 or index >= len(self._history):
+            return []
+        group = self._history.pop(index)
+        # remove each object by identity from career_levels
+        for cl in group:
+            try:
+                self.career_levels.remove(cl)
+            except ValueError:
+                # already removed or not present; ignore
+                pass
+        return group
 
     def get_current_npc(self) -> NPC:
         return build_npc(self.name or "", self.race or "", self.career_levels)
