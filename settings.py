@@ -15,3 +15,9 @@ CHAR_PER_LEVEL = 5
 CAREERS_CSV = "Careers-WFRP_NPC_GEN_DF_Careers.csv"
 RACES_CSV = "Races-Table 1.csv"
 TALENTS_CSV = "Random_Talents-Table 1.csv"
+
+# UI theming defaults (can be changed at runtime via the Config dialog)
+# Theme names can be listed at runtime via ttk.Style().theme_names()
+DEFAULT_THEME = "clam"
+# Accent color used for enhanced styling (hex string)
+ACCENT_COLOR = "#4f94d4"

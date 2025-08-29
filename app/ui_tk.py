@@ -9,29 +9,178 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from app.viewmodel import ViewModel
 from npc.validators import require_at_least_one_talent
-from settings import OUTPUT_DIR
+import settings
+from settings import OUTPUT_DIR, DEFAULT_THEME, ACCENT_COLOR
 from io_.writer import write_npc
+import json
 
 
 def run_app():
     vm = ViewModel()
     root = tk.Tk()
     root.title("WFRP NPC Gen (minimal)")
+    # sensible minimum size to keep layout usable
+    try:
+        root.minsize(800, 600)
+    except Exception:
+        pass
+
+    # apply theme and basic styling
+    style = ttk.Style(root)
+    # load persisted config if present
+    cfg_path = settings.ROOT / 'app_config.json'
+    if cfg_path.exists():
+        try:
+            with open(cfg_path, 'r', encoding='utf-8') as fh:
+                cfg = json.load(fh)
+            # apply persisted output dir
+            if 'output_dir' in cfg:
+                try:
+                    settings.OUTPUT_DIR = cfg['output_dir']
+                except Exception:
+                    pass
+            # apply persisted theme
+            if 'theme' in cfg:
+                try:
+                    style.theme_use(cfg['theme'])
+                except Exception:
+                    pass
+            else:
+                try:
+                    style.theme_use(DEFAULT_THEME)
+                except Exception:
+                    pass
+            # apply persisted accent
+            if 'accent' in cfg:
+                try:
+                    style.configure('Accent.TLabel', background=cfg['accent'])
+                    style.configure('Accent.TButton', foreground='white', background=cfg['accent'])
+                except Exception:
+                    pass
+        except Exception:
+            try:
+                style.theme_use(DEFAULT_THEME)
+            except Exception:
+                pass
+    else:
+        try:
+            style.theme_use(DEFAULT_THEME)
+        except Exception:
+            pass
 
     frm = ttk.Frame(root, padding=10)
-    frm.grid(padx=8, pady=8)
+    frm.grid(sticky='nsew', padx=8, pady=8)
+    # allow the main window to resize and let the frame expand
+    root.columnconfigure(0, weight=1)
+    root.rowconfigure(0, weight=1)
 
-    ttk.Label(frm, text="Name").grid(column=0, row=0)
+    # --- Front page frame ---
+    front = ttk.Frame(root, padding=12)
+    def show_front():
+        builder_frame.grid_remove()
+        front.grid()
+
+    def show_builder():
+        front.grid_remove()
+        builder_frame.grid()
+
+    # Big buttons with simple styling
+    ttk.Label(front, text="WFRP NPC Generator", font="Helvetica 18 bold").grid(column=0, row=0, pady=8)
+    ttk.Button(front, text="Create NPC", command=show_builder, width=30).grid(column=0, row=1, pady=6)
+    
+    def open_output():
+        out = Path(OUTPUT_DIR)
+        out.mkdir(parents=True, exist_ok=True)
+        try:
+            subprocess.run(["open", str(out)])
+        except Exception:
+            messagebox.showinfo("Output Folder", f"Output: {out}")
+    ttk.Button(front, text="Open Output Folder", command=open_output, width=30).grid(column=0, row=2, pady=6)
+
+    def open_config():
+        dlg = tk.Toplevel(root)
+        dlg.title('Config')
+        dlg.transient(root)
+        ttk.Label(dlg, text='Output folder:').grid(column=0, row=0, sticky='w')
+        outvar = tk.StringVar(value=str(Path(OUTPUT_DIR)))
+        ttk.Entry(dlg, textvariable=outvar, width=60).grid(column=0, row=1, sticky='w')
+
+        # Theme selection
+        ttk.Label(dlg, text='Theme:').grid(column=0, row=2, sticky='w', pady=(8,0))
+        theme_var = tk.StringVar(value=style.theme_use())
+        themes = style.theme_names()
+        theme_combo = ttk.Combobox(dlg, textvariable=theme_var, values=themes, state='readonly')
+        theme_combo.grid(column=0, row=3, sticky='w')
+
+        # Accent color (used for some widget highlights)
+        ttk.Label(dlg, text='Accent color (hex):').grid(column=0, row=4, sticky='w', pady=(8,0))
+        accent_var = tk.StringVar(value=str(ACCENT_COLOR))
+        ttk.Entry(dlg, textvariable=accent_var, width=20).grid(column=0, row=5, sticky='w')
+
+        def save():
+            try:
+                import settings as _s
+                _s.OUTPUT_DIR = outvar.get()
+                # apply theme immediately
+                try:
+                    style.theme_use(theme_var.get())
+                except Exception:
+                    pass
+                # update simple accent style for Labels and Buttons
+                try:
+                    accent = accent_var.get()
+                    style.configure('Accent.TLabel', background=accent)
+                    style.configure('Accent.TButton', foreground='white', background=accent)
+                except Exception:
+                    pass
+                # persist configuration to disk
+                try:
+                    cfg = {
+                        'output_dir': outvar.get(),
+                        'theme': theme_var.get(),
+                        'accent': accent_var.get(),
+                    }
+                    with open(cfg_path, 'w', encoding='utf-8') as fh:
+                        json.dump(cfg, fh, indent=2)
+                except Exception:
+                    # non-fatal; continue
+                    pass
+                dlg.destroy()
+            except Exception as e:
+                messagebox.showerror('Config', f'Could not set output: {e}')
+
+        ttk.Button(dlg, text='Save', command=save).grid(column=0, row=6, pady=6)
+    ttk.Button(front, text="Config", command=open_config, width=30).grid(column=0, row=3, pady=6)
+    ttk.Button(front, text="Exit", command=root.destroy, width=30).grid(column=0, row=4, pady=6)
+
+    front.grid()
+
+    # --- Builder frame (the previous main UI) ---
+    builder_frame = ttk.Frame(root, padding=10)
+    # make builder_frame expand when shown
+    builder_frame.grid(sticky='nsew')
+    builder_frame.columnconfigure(0, weight=0)
+    builder_frame.columnconfigure(1, weight=1)
+    builder_frame.columnconfigure(2, weight=0)
+    # rows that can expand when window is resized
+    builder_frame.rowconfigure(5, weight=1)   # listbox
+    builder_frame.rowconfigure(8, weight=1)   # characteristics text
+    builder_frame.rowconfigure(9, weight=1)   # skills text
+
+    ttk.Label(builder_frame, text="Name").grid(column=0, row=0)
     name = tk.StringVar()
-    ttk.Entry(frm, textvariable=name).grid(column=1, row=0)
+    ttk.Entry(builder_frame, textvariable=name).grid(column=1, row=0)
 
-    ttk.Label(frm, text="Race").grid(column=0, row=1)
+    # Return to front page (top-right)
+    ttk.Button(builder_frame, text="Return", command=show_front).grid(column=2, row=0, padx=6, sticky=tk.E)
+
+    ttk.Label(builder_frame, text="Race").grid(column=0, row=1)
     race = tk.StringVar()
-    ttk.Entry(frm, textvariable=race).grid(column=1, row=1)
+    ttk.Entry(builder_frame, textvariable=race).grid(column=1, row=1)
 
-    ttk.Label(frm, text="Career (name:level)").grid(column=0, row=2)
+    ttk.Label(builder_frame, text="Career (name:level)").grid(column=0, row=2)
     career_input = tk.StringVar()
-    ttk.Entry(frm, textvariable=career_input, width=40).grid(column=1, row=2)
+    ttk.Entry(builder_frame, textvariable=career_input, width=40).grid(column=1, row=2)
 
     # Buttons: start NPC and add career
     def on_start():
@@ -57,35 +206,43 @@ def run_app():
                 lb_careers.insert(tk.END, display)
             career_input.set("")
             refresh_summary()
+            # show validation text confirming added careers
+            lbl_status.config(text=f"Added: {', '.join(f'{c.career} {c.level}' for c in added)}")
         except Exception as e:
             lbl_status.config(text=f"Error: {e}")
 
-    ttk.Button(frm, text="Start NPC", command=on_start).grid(column=0, row=3, pady=4)
-    ttk.Button(frm, text="Add Career", command=on_add_career).grid(column=1, row=3, sticky=tk.W, pady=4)
+    ttk.Button(builder_frame, text="Start NPC", command=on_start).grid(column=0, row=3, pady=4)
+    ttk.Button(builder_frame, text="Add Career", command=on_add_career).grid(column=1, row=3, sticky=tk.W, pady=4)
 
-    # Listbox to show added careers
-    lb_careers = tk.Listbox(frm, height=6, width=40)
-    lb_careers.grid(column=0, row=5, columnspan=2)
-    # horizontal scrollbar for long career entries
-    hscroll = tk.Scrollbar(frm, orient=tk.HORIZONTAL, command=lb_careers.xview)
+    # Listbox to show added careers (expandable)
+    lb_careers = tk.Listbox(builder_frame, height=6)
+    lb_careers.grid(column=0, row=5, columnspan=3, sticky='nsew', padx=4, pady=4)
+    # horizontal scrollbar for long career entries (attached to builder_frame)
+    hscroll = tk.Scrollbar(builder_frame, orient=tk.HORIZONTAL, command=lb_careers.xview)
     lb_careers.configure(xscrollcommand=hscroll.set)
-    hscroll.grid(column=0, row=6, columnspan=2, sticky='we')
+    hscroll.grid(column=0, row=6, columnspan=3, sticky='we')
 
     # Status and summary labels
-    lbl_status = ttk.Label(frm, text="")
-    lbl_status.grid(column=0, row=7, columnspan=2)
+    lbl_status = ttk.Label(builder_frame, text="")
+    # apply accent style if available
+    try:
+        style.configure('Accent.TLabel')
+        lbl_status = ttk.Label(builder_frame, text="", style='Accent.TLabel')
+    except Exception:
+        lbl_status = ttk.Label(builder_frame, text="")
+    lbl_status.grid(column=0, row=7, columnspan=3, sticky='we', pady=(4,2))
 
     # Use small read-only Text widgets with wrapping for long summaries
-    txt_chars = tk.Text(frm, height=3, width=60, wrap='word')
-    txt_chars.grid(column=0, row=8, columnspan=2, sticky='we')
+    txt_chars = tk.Text(builder_frame, height=3, width=60, wrap='word')
+    txt_chars.grid(column=0, row=8, columnspan=3, sticky='nsew')
     txt_chars.configure(state='disabled')
 
-    txt_skills = tk.Text(frm, height=3, width=60, wrap='word')
-    txt_skills.grid(column=0, row=9, columnspan=2, sticky='we')
+    txt_skills = tk.Text(builder_frame, height=3, width=60, wrap='word')
+    txt_skills.grid(column=0, row=9, columnspan=3, sticky='nsew')
     txt_skills.configure(state='disabled')
 
-    txt_talents = tk.Text(frm, height=2, width=60, wrap='word')
-    txt_talents.grid(column=0, row=10, columnspan=2, sticky='we')
+    txt_talents = tk.Text(builder_frame, height=2, width=60, wrap='word')
+    txt_talents.grid(column=0, row=10, columnspan=3, sticky='nsew')
     txt_talents.configure(state='disabled')
 
     def refresh_summary():
@@ -106,6 +263,8 @@ def run_app():
         txt_talents.delete('1.0', tk.END)
         txt_talents.insert(tk.END, s['talents'])
         txt_talents.configure(state='disabled')
+
+    # Controls frame placeholder (created later when callbacks exist)
 
     def on_export():
         try:
@@ -128,7 +287,7 @@ def run_app():
         except Exception as e:
             lbl_status.config(text=f"Export error: {e}")
 
-    ttk.Button(frm, text="Export NPC", command=on_export).grid(column=0, row=10, pady=6)
+    # legacy placement removed; buttons are in controls frame
     def on_open_output():
         out = Path(OUTPUT_DIR)
         out.mkdir(parents=True, exist_ok=True)
@@ -138,7 +297,7 @@ def run_app():
         except Exception:
             messagebox.showinfo("Open Folder", f"Output folder: {out}")
 
-    ttk.Button(frm, text="Open Output Folder", command=on_open_output).grid(column=1, row=10, pady=6)
+    # legacy placement removed; buttons are in controls frame
 
     def on_undo():
         removed = vm.undo_last_career()
@@ -180,8 +339,6 @@ def run_app():
             btn = ttk.Button(frame, text="Undo Group", command=make_undo(i))
             btn.grid(column=1, row=row, padx=6)
 
-    ttk.Button(frm, text="Undo Last", command=on_undo).grid(column=0, row=11, pady=4)
-    ttk.Button(frm, text="History", command=on_history).grid(column=1, row=11, pady=4)
 
     def on_details():
         s = vm.get_summary()
@@ -199,8 +356,25 @@ def run_app():
         txt.insert(tk.END, "Careers:\n" + "\n".join(f"{c[0]} {c[1]}" for c in s['careers']))
         txt.configure(state='disabled')
 
-    ttk.Button(frm, text="Details", command=on_details).grid(column=0, row=11)
+    # Details button moved to controls frame
+    # Create controls frame now that callbacks exist so commands are bound correctly
+    controls = ttk.Frame(builder_frame)
+    controls.grid(column=0, row=11, columnspan=3, sticky='we', pady=(8,4))
+    controls.columnconfigure(0, weight=1)
+    # place buttons inside controls (left-aligned)
+    btn_export = ttk.Button(controls, text="Export NPC", command=on_export)
+    btn_export.pack(side='left', padx=6)
+    btn_open = ttk.Button(controls, text="Open Output Folder", command=on_open_output)
+    btn_open.pack(side='left', padx=6)
+    btn_undo = ttk.Button(controls, text="Undo Last", command=on_undo)
+    btn_undo.pack(side='left', padx=6)
+    btn_history = ttk.Button(controls, text="History", command=on_history)
+    btn_history.pack(side='left', padx=6)
+    btn_details = ttk.Button(controls, text="Details", command=on_details)
+    btn_details.pack(side='left', padx=6)
 
+    # Start with front page visible
+    builder_frame.grid_remove()
     root.mainloop()
 
 
