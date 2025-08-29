@@ -1,0 +1,13 @@
+Name: Abekat
+Race: Elf
+Latest Career: Field Warden
+Latest Status: Silver 1
+
+Characteristics:
+Ws: 30, Bs: 35, S: 30, T: 30, I: 30, Agi: 35, Dex: 30, Int: 40, Wp: 35, Fel: 30
+
+Skills:
+Charm 10, Consume Alcohol 10, Dodge 10, Gossip 5, Intuition 5, Lore (Moot) 5, Melee (Basic) 10, Navigation 5, Outdoor Survival 10, Perception 5, Ranged (Sling) 5, Secret Signs (Scout) 10, Stealth (Rural) 5, Trade (Any) 5
+
+Talents:
+Careful Strike, Fast Shot, Nose for Trouble

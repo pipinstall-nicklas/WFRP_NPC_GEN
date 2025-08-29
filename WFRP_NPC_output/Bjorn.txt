@@ -1,0 +1,13 @@
+Name: Bjorn
+Race: Dwarf
+Latest Career: Apothecary
+Latest Status: Brass 3
+
+Characteristics:
+Ws: 30, Bs: 30, S: 30, T: 50, I: 30, Agi: 30, Dex: 50, Int: 50, Wp: 30, Fel: 40
+
+Skills:
+Charm 10, Consume Alcohol 20, Gossip 10, Haggle 10, Heal 20, Language (Classical) 20, Language (Guilder) 10, Lore (Chemistry) 20, Lore (Medicine) 20, Lore (Plants) 20, Lore (Science) 10, Perception 10, Trade (Apothecary) 20, Trade (Poisoner) 20
+
+Talents:
+Concoct, Craftsman (Apothecary), Etiquette (Guilder), Pharmacist, Read/Write 2

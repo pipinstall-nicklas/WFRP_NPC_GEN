@@ -1,0 +1,13 @@
+Name: Kris
+Race: Human
+Latest Career: 
+Latest Status: 
+
+Characteristics:
+Ws: 30, Bs: 30, S: 30, T: 30, I: 30, Agi: 30, Dex: 30, Int: 30, Wp: 30, Fel: 30
+
+Skills:
+
+
+Talents:
+
