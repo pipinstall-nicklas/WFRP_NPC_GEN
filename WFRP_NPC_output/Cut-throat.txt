@@ -19,3 +19,4 @@ Athletics 15, Climb 5, Consume Alcohol 10, Cool 15, Dodge 15, Endurance 15, Eval
 
 ## Talents
 Combat Aware, Criminal, Dirty Fighting, Etiquette(Criminals), Flee!
+f
