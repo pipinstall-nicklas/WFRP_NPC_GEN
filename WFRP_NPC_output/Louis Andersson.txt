@@ -1,0 +1,21 @@
+NPC Name: Louis Andersson
+## Characteristics
+Ws: 35.0
+Bs: 30.0
+S: 30.0
+T: 40.0
+I: 40.0
+Agi: 45.0
+Dex: 40.0
+Int: 70.0
+Wp: 50.0
+Fel: 60.0
+
+Current Career: noble 3
+Current Status: Gold 5
+
+## Skills
+Art (Writing) 10, Athletics 5, Bribe 10, Bribery 10, Charm 25, Climb 5, Consume Alcohol 15, Cool 20, Dodge 5, Drive 5, Endurance 10, Entertain (Storytelling) 15, Evaluate 10, Gamble 20, Gossip 30, Haggle 15, Intimidate 5, Intuition 30, Language (Any) 30, Language (Classical) 15, Leadership 20, Lore (Any) 15, Lore (Heraldry) 25, Lore (Local) 20, Lore (Politics) 30, Melee (Brawling) 5, Melee (Fencing) 5, Melee (Parry) 10, Perception 20, Play (Any) 5, Ride (Horse) 35, Row 10, Sail 5, Swim 5
+
+## Talents
+Argumentative, Attractive, Blather, Commanding Presence, Etiquette (Nobles), Gregarious, Luck, Public Speaker, Read/Write, Strider (Coastal)

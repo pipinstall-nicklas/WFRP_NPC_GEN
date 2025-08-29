@@ -1,0 +1,21 @@
+NPC Name: Knuspatron
+## Characteristics
+Ws: 50.0
+Bs: 60.0
+S: 40.0
+T: 45.0
+I: 60.0
+Agi: 55.0
+Dex: 45.0
+Int: 65.0
+Wp: 40.0
+Fel: 65.0
+
+Current Career: camp follower 2
+Current Status: Brass 4
+
+## Skills
+Athletics 20, Bribery 20, Charm 15, Climb 25, Consume Alcohol 10, Cool 20, Dodge 15, Endurance 20, Entertain (Acting) 20, Entertain (Any) 5, Entertain (Taunt) 5, Gamble 20, Gossip 20, Haggle 10, Intimidate 5, Intuition 20, Language (Battle) 5, Leadership 15, Melee (Any) 10, Melee (Basic) 15, Navigation 30, Outdoor Survival 15, Perception 20, Perform (Dance) 5, Play (Flute) 5, Ranged (Any) 10, Ranged (Blackpowder) 5, Ranged (Crossbow) 20, Ranged (Engineer) 15, Ranged (Thrown) 15, Ride (Horse) 25, Stealth (Rural) 10, Trade (Gunsmith) 10
+
+## Talents
+Accurate Shot, Criminal, Dirty Fighting 2, Etiquette(Soldiers), Gunner, Marksman, Menacing, Stone Soup, Unshakeable

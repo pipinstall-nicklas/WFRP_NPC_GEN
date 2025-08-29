@@ -1,0 +1,21 @@
+NPC Name: Henrik Tapermann
+## Characteristics
+Ws: 40
+Bs: 35
+S: 35
+T: 40
+I: 30
+Agi: 45
+Dex: 30
+Int: 30
+Wp: 35
+Fel: 30
+
+Current Career: Coachman
+Current Status: Silver 2
+
+## Skills
+Animal Care 10, Athletics 5, Charm Animal 5, Climb 5, Consume Alcohol 15, Drive 15, Endurance 10, Entertain (Storytelling) 10, Gossip 15, Haggle 10, Intuition 10, Lore (Local) 15, Melee (Basic) 10, Melee (Brawling) 5, Navigation 10, Outdoor Survival 5, Perception 5, Ranged (Blackpowder) 10, Ranged (Entangling) 5, Ride (Horse) 5, Trade (Any) 10
+
+## Talents
+Animal Affinity, Crack the Whip, Seasoned Traveller, Strong-Minded

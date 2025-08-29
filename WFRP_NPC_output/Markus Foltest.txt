@@ -1,0 +1,21 @@
+NPC Name: Markus Foltest
+## Characteristics
+Ws: 60.0
+Bs: 40.0
+S: 85.0
+T: 60.0
+I: 65.0
+Agi: 100.0
+Dex: 40.0
+Int: 40.0
+Wp: 70.0
+Fel: 40.0
+
+Current Career: warrior of tzeentch 3
+Current Status: Silver 4
+
+## Skills
+Athletics 20, Bribery 30, Channelling 45, Charm 15, Consume Alcohol 30, Cool 45, Dodge 35, Endurance 35, Gamble 5, Gossip 30, Haggle 10, Intimidate 35, Intuition 40, Language (Dark Tounge) 30, Language (Magick) 15, Leadership 45, Lore (Anatomy) 15, Lore (Any) 85, Melee (Any) 50, Melee (Basic) 25, Melee (Brawling) 5, Melee (Flail or Two-handed) 10, Perception 25, Perform (Fight) 15, Ranged (Entangling) 10, Stealth (Rural) 15
+
+## Talents
+Arcane lore (Tzeentch), Combat Master 3, Combat Reflexes, Furious Assault, Instinctive Diction, Iron Jaw, Menacing, Petty Magic, Schemer, Strike Mighty Blow 2, Strike to Injure 2, Warleader, Wilful Corruption

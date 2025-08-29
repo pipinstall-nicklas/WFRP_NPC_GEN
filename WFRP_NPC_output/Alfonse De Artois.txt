@@ -1,0 +1,21 @@
+NPC Name: Alfonse De Artois
+## Characteristics
+Ws: 60
+Bs: 30
+S: 50
+T: 40
+I: 60
+Agi: 50
+Dex: 30
+Int: 35
+Wp: 55
+Fel: 50
+
+Current Career: knight panther 2
+Current Status: Silver 5
+
+## Skills
+Animal Care 15, Art (Writing) 10, Athletics 20, Charm 15, Charm Animal 10, Consume Alcohol 30, Cool 25, Dodge 25, Drive 10, Endurance 30, Entertain (Storytelling) 15, Gamble 15, Gossip 15, Haggle 15, Heal 10, Intimidate 30, Intuition 10, Language (Any) 10, Language (Battle) 25, Language (Classical) 5, Leadership 15, Lore ( Warfare) 15, Lore (Any) 35, Lore (Empire) 5, Lore (Heraldry) 20, Lore (Local) 5, Melee (Any) 30, Melee (Basic) 20, Melee (Brawling) 5, Melee (Cavalry) 10, Melee (Two-handed) 5, Outdoor Survival 15, Perception 20, Play (Drum) 5, Research 5, Ride (Horse) 10, Secret Signs (Knightly Order) 20, Trade (Any) 20, Trade (Farrier) 10
+
+## Talents
+Drilled, Etiquette (Knights of Chivalrous Virtues), Hardy, Iron Will, Read/Write, Roughrider, Seasoned Traveller, Stout-hearted, Strike Mighty Blow 2, Strong-Minded, Suave

@@ -1,0 +1,21 @@
+NPC Name: Briala
+## Characteristics
+Ws: 70.0
+Bs: 60.0
+S: 50.0
+T: 30.0
+I: 50.0
+Agi: 60.0
+Dex: 70.0
+Int: 60.0
+Wp: 40.0
+Fel: 30.0
+
+Current Career: ghost strider 4
+Current Status: Silver 3
+
+## Skills
+Athletics 30, Charm Animal 30, Climb 20, Cool 30, Dodge 30, Endurance 30, Intimidate 20, Language (Any) 20, Lip Reading 30, Lore (Beasts) 20, Melee (Basic) 30, Navigation 20, Outdoor Survival 20, Perception 20, Ranged (Bow) 20, Secret Signs (Ranger) 30, Set Trap 30, Stealth (Any) 20, Swim 30, Track 30, Trade (Bowyer) 20
+
+## Talents
+Accurate Shot, Catfall, Combat Aware, Fast Shot, Fleet Footed, Orientation, Scale Sheer Surface, Shadow, Sniper, Strider (Woodlands)

@@ -1,0 +1,21 @@
+NPC Name: Cut-throat
+## Characteristics
+Ws: 40
+Bs: 40
+S: 40
+T: 40
+I: 35
+Agi: 35
+Dex: 40
+Int: 30
+Wp: 35
+Fel: 30
+
+Current Career: thief 2
+Current Status: Brass 3
+
+## Skills
+Athletics 15, Climb 5, Consume Alcohol 10, Cool 15, Dodge 15, Endurance 15, Evaluate 10, Gamble 10, Gossip 10, Heal 10, Intimidate 10, Intuition 5, Lore (Local) 20, Melee (Basic) 10, Outdoor Survival 10, Perception 15, Pick Lock 10, Ranged (Bow) 10, Secret Signs (Thief ) 10, Sleight of Hand 10, Stealth (Rural) 10, Stealth (Urban) 5
+
+## Talents
+Combat Aware, Criminal, Dirty Fighting, Etiquette(Criminals), Flee!
