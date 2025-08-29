@@ -1,0 +1,50 @@
+Race_and_Origin;R_Skills;R_Talents_Traits;M;Ws;Bs;S;T;I;Agi;Dex;Int;Wp;Fel;W
+Human (Reikland);Animal Care, Charm, Cool, Evaluate, Gossip, Haggle, Language (Bretonnian), Language (Wastelander), Leadership, Lore (Reikland), Melee (Basic), Ranged (Bow);Doomed, Savvy or Suave, 3 Random Talents;4;20;20;20;20;20;20;20;20;20;20;
+Human (Altdorf_South_Bank);Animal Care, Charm, Cool, Gossip, Language (Any), Leadership, Lore (Any), Melee (Basic), Melee (Fencing), Ranged (Blackpowder), Ranged (Bow), Ride;Doomed, Etiquette (Any), Noble Blood or Pure Soul, Read/Write or Supportive, Savvy or Suave;4;20;20;20;20;20;20;20;20;20;20;
+Human (Altdorf_Eastender);Cool, Evaluate, Gossip, Haggle, Intimidate, Intuition, Language (Battle or Thieves’ Tongue), Lore (Reikland), Melee (Brawling), Ranged (Blackpowder), Sleight of Hand, Stealth;Argumentative or Flee!, Criminal or 1 Random Talent, Doomed, Nimble Fingered or Read/Write, Savvy or Suave;4;20;20;20;20;20;20;20;20;20;20;
+Human (Altdorf_Hexxerbezrik);Cool, Evaluate, Gossip, Intimidate, Intuition, Language (Classical), Lore (Reikland), Lore (Magic), Melee (Basic), Perception, Sleight of Hand, Stealth;Doomed, Beneath Notice or Read/Write, Savvy or Suave, Second Sight or Sixth Sense, 1 Random Talent;4;20;20;20;20;20;20;20;20;20;20;
+Human (Altdorf_Dockland);Consume Alcohol, Evaluate, Gossip, Haggle, Intimidate, Intuition, Language (Thieves’ Tongue), Lore (Reikland), Melee (Brawling), Row, Sail, Sleight of Hand;Criminal or Etiquette (Merchants), Dealmaker or Menacing, Doomed, Savvy or Suave, 1 Random Talent;4;20;20;20;20;20;20;20;20;20;20;
+Human (Middenheim);Bribery, Charm, Cool, Entertain (Any), Evaluate, Gossip, Haggle, Leadership, Lore (Middenheim), Melee (Basic), Ranged (Bow), Trade (choose one);Doomed, Etiquette (any) or Strong Back, 3 Random Talents;4;20;20;20;20;20;20;20;20;20;20;
+Human (Middenland);Animal Care, Cool, Evaluate, Gossip, Haggle, Intimidate, Language (Wastelander), Leadership, Lore (Middenland), Melee (Basic), Outdoor Survival, Ranged (Bow);Doomed or Additional Random Talent, Menacing or Warrior Born, 3 Random Talents;4;20;20;20;20;20;20;20;20;20;20;
+Human (Nordland);Consume Alcohol, Evaluate, Gossip, Haggle, Language (Norse), Language (Wastelander), Lore (Nordland), Melee (Basic), Ranged (Bow), Sail (Any), Swim, Trade (choose one);Doomed or Additional Random Talent, Fisherman or Rover, Stout-hearted or Very Resilient, 2 Random Talents;4;20;20;20;20;20;20;20;20;20;20;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+Child_Of_Ulric;;;;;;;;;;;;;;
+Dwarf;"Consume Alcohol, Cool, Endurance, Entertain (Storytelling), Evaluate, Intimidate,
+
+ Language (Khazalid), Lore (Dwarfs), Lore (Geology), Lore (Metallurgy), Melee (Basic), Trade (any one)";"Magic Resistance, Night Vision, Read/Write or Relentless, 
+
+Resolute or Strong-minded, Sturdy";3;30;20;20;30;20;10;30;20;40;10;
+Dwarf (Altdorf);"Consume Alcohol, Cool, Endurance, Evaluate, Intimidate, Intuition, Language (Khazalid), 
+
+Lore (Dwarfs), Lore (Geology), Lore (Metallurgy), Melee (Basic), Trade (any one)";"Craftsman (Any) or Resolute, Magic Resistance, Night Vision, 
+
+Read/Write or Relentless, Sturdy";3;30;20;20;30;20;10;30;20;40;10;
+Halfling;"Charm, Consume Alcohol, Dodge, Gamble, Haggle, Intuition, Language (Mootish), 
+
+Lore (Reikland), Perception, Sleight of Hand, Stealth, Trade (Cook)";"Acute Sense (Taste), Night Vision, Resistance (Chaos), Small, 
+
+2 Random Talents";3;10;30;10;20;20;20;30;20;30;30;
+High_elf;"Cool, Entertain (Sing), Evaluate, Language (Eltharin), Leadership, Melee (Basic), Navigation, 
+
+Perception, Play (any one), Ranged (Bow), Sail, Swim";"Acute Sense (Sight), Coolheaded or Savvy, Night Vision,
+
+ Second Sight or Sixth Sense, Read/Write";5;30;30;20;20;40;30;30;30;30;20;
+Wood_Elf;"Athletics, Climb, Endurance, Entertain (Sing), Intimidate, Language (Eltharin), Melee (Basic),
+
+ Outdoor Survival, Perception, Ranged (Bow), Stealth (Rural), Track";"Acute Sense (Sight), Hardy or Second Sight, Night Vision, 
+
+Read/Write or Very Resilient, Rover";5;30;30;20;20;40;30;30;30;30;20;
+Ogre;;;;;;;;;;;;;;
+Q_Human;;Prejudice (any);4;30;30;30;30;30;30;30;30;30;30;12
+Q_Dwarf;;;;;;;;;;;;;;
+Q_Elf;;;;;;;;;;;;;;
+Q_Halfling;;;;;;;;;;;;;;
+Q_Ogre;;;;;;;;;;;;;;
+Q_Child_Of_Ulric;;Night_Vision, Armour (Hide 2), Bite (SB+3), Fear(2), Tracker;5;40;30;40;40;40;40;20;20;30;10;19

@@ -1,0 +1,13 @@
+Name: {name}
+Race: {race}
+Latest Career: {latest_career}
+Latest Status: {latest_status}
+
+Characteristics:
+{characteristics}
+
+Skills:
+{skills}
+
+Talents:
+{talents}
