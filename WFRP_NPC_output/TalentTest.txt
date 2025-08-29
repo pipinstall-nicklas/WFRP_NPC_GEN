@@ -1,0 +1,13 @@
+Name: TalentTest
+Race: Human
+Latest Career: Engineer
+Latest Status: Brass 4
+
+Characteristics:
+Ws: 30, Bs: 35, S: 30, T: 30, I: 30, Agi: 30, Dex: 35, Int: 35, Wp: 30, Fel: 30
+
+Skills:
+Consume Alcohol 5, Cool 5, Endurance 5, Language (Classical) 5, Lore (Engineer) 5, Perception 5, Ranged (Blackpowder) 5, Trade (Engineer) 5
+
+Talents:
+Artistic, Gunner, Read/Write, Tinker
