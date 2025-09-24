@@ -40,15 +40,22 @@ class ViewModel:
         parts = [p.strip() for p in career_input.split(",") if p.strip()]
         added: List[CareerLevel] = []
         for p in parts:
+            # Support two formats: 'Name:3' and 'Name 3' (trailing level with a space)
             if ":" in p:
-                career, lvl = [x.strip() for x in p.split(":", 1)]
+                career, lvl_str = [x.strip() for x in p.split(":", 1)]
                 try:
-                    lvl = int(lvl)
+                    lvl = int(lvl_str)
                 except ValueError:
                     lvl = 1
             else:
-                career = p
-                lvl = 1
+                # Try to detect a trailing integer after the last space (e.g. 'Watchman 3')
+                sp = p.rsplit(' ', 1)
+                if len(sp) == 2 and sp[1].isdigit():
+                    career = sp[0].strip()
+                    lvl = int(sp[1])
+                else:
+                    career = p
+                    lvl = 1
 
             expanded = get_career_levels(career, lvl)
             if not expanded:

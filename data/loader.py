@@ -63,3 +63,19 @@ def get_career_levels(career_name: str, upto_level: int) -> List[CareerLevel]:
     # sort by level
     results.sort(key=lambda c: c.level)
     return results
+
+
+def get_career_names() -> List[str]:
+    """Return a sorted list of unique base career names (without numeric level suffix).
+
+    Example: if CSV contains 'Watchman 1', 'Watchman 2', this will return ['Watchman'].
+    """
+    df = load_careers()
+    names = []
+    for val in df['Career'].astype(str).tolist():
+        # split off trailing level if present
+        base = val.rsplit(' ', 1)[0] if val.rsplit(' ', 1)[-1].isdigit() else val
+        names.append(base.strip())
+    # unique + sort
+    unique = sorted(set([n for n in names if n]))
+    return unique
